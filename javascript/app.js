@@ -27,9 +27,9 @@ navigator.getBattery().then((battery) => {
             console.log("is charging");
             dischargeTime.innerText =""
             chargingStatus.innerText='Charging status: charging'
-            let chargingHour = Math.floor(battery.chargingTime / 3600);
+            let chargingHour = parseInt(battery.chargingTime / 3600);
 
-            let chargingMinutes = Math.floor((battery.chargingTime % 3600) / 60);
+            let chargingMinutes = parseInt(battery.chargingTime / 3600 - chargingHour * 60);
             chargeTime.innerText = `Charging time: ${chargingHour} hour and ${chargingMinutes} minutes `;
         }else if (battery.dischargingTime) {
             console.log("not charging");
@@ -37,8 +37,8 @@ navigator.getBattery().then((battery) => {
             charge.classList.remove("active");
             chargingStatus.innerText = 'Charging status: not charging';
             chargeTime.innerText =""
-            let hour = Math.floor(battery.dischargingTime / 3600);
-            let minutes = Math.floor((battery.dischargingTime % 3600) / 60);
+            let hour = parseInt(battery.dischargingTime / 3600);
+            let minutes = parseInt(battery.dischargingTime  /60 - hour* 60);
             dischargeTime.innerText = `Discharging time: ${hour} hour and ${minutes} minutes remaining`;
           }
           
