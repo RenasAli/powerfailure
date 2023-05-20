@@ -1,0 +1,21 @@
+{
+    "name": "Power Failure",
+    "short_name": "Power Failure",
+    "description": "Power Failure",
+    "icons": [
+      {
+        "src": "/icons/logo.png",
+        "sizes": "150x150",
+        "type": "image/png"
+        
+        
+      }
+      
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "theme_color": "#AAFF00",
+    "background_color": "#ffffff",
+    "orientation": "portrait-primary"
+  }
+  
