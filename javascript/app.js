@@ -27,19 +27,29 @@ navigator.getBattery().then((battery) => {
             console.log("is charging");
             dischargeTime.innerText =""
             chargingStatus.innerText='Charging status: charging'
-            let chargingHour = parseInt(battery.chargingTime / 3600);
-
-            let chargingMinutes = parseInt(battery.chargingTime / 3600 - chargingHour * 60);
-            chargeTime.innerText = `Charging time: ${chargingHour} hour and ${chargingMinutes} minutes `;
+            if (battery.chargingTime !== Infinity) {
+                let chargingHour = parseInt(battery.chargingTime / 3600);
+                let chargingMinutes = parseInt(battery.chargingTime / 60 - chargingHour * 60);
+                chargeTime.innerText = `Charging time: ${chargingHour} hour and ${chargingMinutes} minutes `;
+              } else {
+                chargeTime.innerText = `Charging time: Laoding...`
+              }
         }else if (battery.dischargingTime) {
             console.log("not charging");
             console.log(battery.dischargingTime)
             charge.classList.remove("active");
             chargingStatus.innerText = 'Charging status: not charging';
             chargeTime.innerText =""
-            let hour = parseInt(battery.dischargingTime / 3600);
-            let minutes = parseInt(battery.dischargingTime  /60 - hour* 60);
-            dischargeTime.innerText = `Discharging time: ${hour} hour and ${minutes} minutes remaining`;
+            if (battery.dischargingTime !== Infinity) {
+                let disChargeHour = parseInt(battery.dischargingTime / 3600);
+                let minutes = parseInt(battery.dischargingTime  /60 - disChargeHour * 60);
+                dischargeTime.innerText = `Discharging time: ${disChargeHour} hour and ${minutes} minutes remaining`;
+                
+              } else {
+                dischargeTime.innerText = `Discharging time: Laoding...`;
+              }
+            
+            
           }
           
     }
@@ -48,6 +58,9 @@ navigator.getBattery().then((battery) => {
         let batteryLevel = `${parseInt(battery.level * 100)}%`
         charge.style.width = batteryLevel;
         batteryPercentage.innerText = batteryLevel;
+        if (parseInt(battery.level * 100) <= 20){
+            charge.style.backgroundColor = "#F97484";
+        }
     }
 });
 
